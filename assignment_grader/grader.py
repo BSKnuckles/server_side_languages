@@ -6,7 +6,6 @@ class Grader:
             raw_input("What grade did they receive for this assignment? "))
 
     def returnLetterGrade(self):
-        print(self.grade)
         if self.grade >= 70.0 and self.grade <= 79.9:
             return "C"
         elif self.grade >= 80.0 and self.grade <= 89.9:
@@ -18,11 +17,14 @@ class Grader:
         elif self.grade < 60.0 and self.grade >= 0:
             return "F"
         else:
-            return "Invalid grade entry"
+            return "Invalid"
 
     def returnFinalResults(self):
-        print(self.name + ' earned a(n) ' + self.returnLetterGrade() +
-              ' for assignment: ' + self.assignment)
+        if self.returnLetterGrade() != "Invalid":
+            print(self.name + ' earned a(n) ' + self.returnLetterGrade() +
+                  ' for assignment: ' + self.assignment)
+        else:
+            print('Invalid grade entered for this assignment')
 
 
 grader = Grader().returnFinalResults()
