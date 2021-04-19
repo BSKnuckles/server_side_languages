@@ -13,18 +13,18 @@ http.createServer(function (req, res) {
     let ext = path.extname(content)
 
     fs.readFile(content, function (err, data) {
-
-        res.writeHead(200) // header()
-
-        if (ext == '.html') {
-            res.write(
-                `<script>const routes = ['index', 'about', 'products', 'store']; const activePage = "${pathName}";</script>`)
+        if (err) {
+            res.writeHead(500)
+            res.destroy(err)
+        } else {
+            res.writeHead(200) // header()
+            if (ext == '.html') {
+                res.write(
+                    `<script>const routes = ['index', 'about', 'products', 'store']; const activePage = "${pathName}";</script>`)
+            }
+            res.end(data)
         }
-
-        res.end(data)
-
     })
-
 }).listen(port, host, () => {
     console.log(`Server is running on http://${host}:${port}`)
 })
