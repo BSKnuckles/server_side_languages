@@ -21,6 +21,13 @@
                     <% } %>
                     <a class="nav-link text-uppercase text-expanded" href="/about">About</a>
                 </li>
+                <% if (pagename=="register") { %>
+                <li class="nav-item active px-lg-4">
+                    <% } else { %>
+                <li class="nav-item px-lg-4">
+                    <% } %>
+                    <a class="nav-link text-uppercase text-expanded" href="/register">Register</a>
+                </li>
             </ul>
         </div>
     </div>

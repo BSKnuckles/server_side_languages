@@ -29,9 +29,56 @@ router.get('/about', function (req, res) {
 	res.render('about', { pagename: 'about' }) // /views/about.ejs
 })
 
+router.get('/register', function (req, res) {
+	res.render('register', { pagename: 'register' })
+})
+
+router.post('/register', function (req, res) {
+	let errors = []
+
+	if (req.body.firstname == '') {
+		errors.push('First name is a required field')
+	}
+	if (req.body.lastname == '') {
+		errors.push('Last name is a required field')
+	}
+	if (req.body.address == '') {
+		errors.push('Address is a required field')
+	}
+	if (req.body.city == '') {
+		errors.push('City is a required field')
+	}
+	if (req.body.state == '') {
+		errors.push('State is a required field')
+	}
+	if (req.body.zip == '') {
+		errors.push('Zip is a required field')
+	}
+	if (req.body.bio == '') {
+		errors.push('Bio cannot be empty')
+	}
+	if (typeof req.body.age == 'undefined') {
+		errors.push('Age is a required field')
+	}
+	if (typeof req.body.gender == 'undefined') {
+		errors.push('Gender is a required field')
+	}
+	if (typeof req.body.consent == 'undefined') {
+		errors.push('You must agree to the terms and conditions')
+	}
+
+	if (errors.length > 0) {
+		res.render('register', { pagename: 'register', errors: errors })
+	} else {
+		res.render('index', {
+			pagename: 'home',
+			success: 'Registration completed successfully!',
+		})
+	}
+})
+
 router.post('/login', function (req, res) {
 	console.log(req.body)
-
 	let errors = []
 
 	// Error checks
